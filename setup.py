@@ -2,16 +2,16 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='mkdocs-your-plugin',
-    version='0.1.0',
-    description='A MkDocs plugin',
-    long_description='',
+    name='mkdocs-new-features-notifier',
+    version='0.0.1',
+    description='A MkDocs plugin for new features detection',
+    long_description='Detects new features in the documentation, and highlights the same on subsequent document iteration',
     keywords='mkdocs',
-    url='',
-    author='Your Name',
-    author_email='your email',
+    url='https://github.com/obuya',
+    author='Kevin Obuya',
+    author_email='kevobuya@gmail.com',
     license='MIT',
-    python_requires='>=2.7',
+    python_requires='>=3.4',
     install_requires=[
         'mkdocs>=1.0.4'
     ],
@@ -30,7 +30,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'mkdocs.plugins': [
-            'your-plugin = mkdocs_your_plugin.plugin:YourPlugin'
+            'mkdocs-new-features-notifier = mkdocs_new_features_notifier.plugin:NewFeaturesNotifier'
         ]
     }
 )

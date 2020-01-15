@@ -103,6 +103,9 @@ class NewFeaturesNotifier(BasePlugin):
         return files
 
     def on_nav(self, nav, config, files):
+        for item in nav.items:
+            if self.new_features_introduced and item.title.strip() == "Updates":
+                item.title = "<div class=\"new_update\">New Features</div>"
         return nav
 
     def get_version_number(self):

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mkdocs-new-features-notifier',
-    version='0.0.46',
+    version='0.1,0',
     description='A MkDocs plugin for new features detection',
     long_description='Detects new features in the documentation, and highlights the same on subsequent document iteration',
     keywords='mkdocs',

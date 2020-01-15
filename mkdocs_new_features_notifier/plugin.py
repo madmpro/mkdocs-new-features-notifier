@@ -47,7 +47,7 @@ def draft_update_message(added_pages_paths, version):
         description = get_document_description(documentation_content)
         path = get_document_path(documentation_content)
         title = get_document_title(documentation_content)
-        items_text += "\n- [" + title + "](" + path + ")" + "\n\t- _" + description + "_"
+        items_text += "\n- [" + title + "](" + path + ")" + "\n\t> _" + description + "_"
     return update_title + items_text
 
 

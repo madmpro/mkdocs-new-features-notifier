@@ -58,20 +58,14 @@ def update_features_listing(new_features_file, added_pages_paths, version):
 
 
 class NewFeaturesNotifier(BasePlugin):
-
     config_scheme = (
-        ('param', config_options.Type(mkdocs_utils.string_types, default='')),
+        ('doc_version', config_options.Type(str, default=set_version_number())),
     )
 
     def __init__(self):
         self.enabled = True
         self.total_time = 0
-
-    def on_serve(self, server):
-        return server
-
-    def on_pre_build(self, config):
-        return
+        self.new_features_introduced = False
 
     def on_files(self, files, config):
 		print("files are ")
@@ -82,42 +76,6 @@ class NewFeaturesNotifier(BasePlugin):
     def on_nav(self, nav, config, files):
         return nav
 
-    def on_env(self, env, config, site_nav):
-        return env
-    
-    def on_config(self, config):
-        return config
-
-    def on_post_build(self, config):
-        return
-
-    def on_pre_template(self, template, template_name, config):
-        return template
-
-    def on_template_context(self, context, template_name, config):
-        return context
-    
-    def on_post_template(self, output_content, template_name, config):
-        return output_content
-    
-    def on_pre_page(self, page, config, site_nav):
-        return page
-
-    def on_page_read_source(self, page, config):
-        return ""
-
-    def on_page_markdown(self, markdown, page, config, site_nav):
-        return markdown
-
-    def on_page_content(self, html, page, config, site_nav):
-        return html
-
-    def on_page_context(self, context, page, config, nav):
-        return context
-
-    def on_post_page(self, output_content, page, config):
-        return output_content
-        
-	
-
-
+    def get_version_number(self):
+        version_num = self.config['doc_version']
+        return version_num

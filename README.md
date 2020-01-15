@@ -3,7 +3,7 @@
 
 ✚ This plugin enables you to notify users of new features in your product. It does this by identifying new documentation files, and having these listed under a blinking navigation entry
 
-✏️ [Blog Post]() | 🐍 [Python Package]() | ✚ [Demo]() | 📕 [Docs]()
+✏️ [Blog Post]() | 🐍 [Python Package](https://pypi.org/project/mkdocs-new-features-notifier/) | ✚ [Demo]() | 📕 [Docs]()
 
 ## Features
 

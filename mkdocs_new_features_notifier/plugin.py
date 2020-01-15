@@ -68,9 +68,38 @@ class NewFeaturesNotifier(BasePlugin):
         self.new_features_introduced = False
 
     def on_files(self, files, config):
-		print("files are ")
-		for file_name in files:
-			print(file_name)
+        current_pages = []
+        new_features_file = ''
+        for file in files:
+            if file.src_path.split('.')[1] in ['markdown', 'mdown', 'mkdn', 'mkd', 'md']:
+                relative_file_path = file.src_path
+                current_pages.append(relative_file_path)
+            if file.src_path.split('/')[-1] == "new-features.md":
+                new_features_file = config["docs_dir"] + "/" + file.src_path
+        initial_pages = []
+        try:
+            with open(config["docs_dir"] + "/" + "versions.txt") as version_file:
+                json_data = version_file.readlines()
+                data = json.loads(json_data[-1])
+                print("initial version is " + data["version"])
+                initial_pages = json.loads(json_data[-1])['pages']
+
+        except FileNotFoundError:
+            versions_file = open(config["docs_dir"] + "/" + "versions.txt", 'w')
+            file_names = str(current_pages).replace("\'", "\"")
+            versions_file.write('{"version":"' + self.get_version_number() + '","pages":' + file_names + '}')
+            versions_file.close()
+        added_pages_paths = []
+        for page in current_pages:
+            if page not in initial_pages:
+                added_pages_paths.append(config["docs_dir"] + "/" + page)
+                self.new_features_introduced = True
+        if added_pages_paths:
+            versions_file = open(config["docs_dir"] + "/" + "versions.txt", 'a')
+            str_current_pages = str(current_pages).replace("\'", "\"")
+            versions_file.write('\n{"version":"' + self.get_version_number() + '","pages":' + str_current_pages + '}')
+            versions_file.close()
+            update_features_listing(new_features_file, added_pages_paths, str(self.get_version_number()))
         return files
 
     def on_nav(self, nav, config, files):

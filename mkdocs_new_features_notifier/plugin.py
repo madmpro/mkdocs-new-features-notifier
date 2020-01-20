@@ -71,7 +71,8 @@ class NewFeaturesNotifier(BasePlugin):
         current_pages = []
         new_features_file = ''
         for file in files:
-            if file.endswith(('.md', '.mkd', '.mkdn', '.mdown', '.markdown')):
+            print(file.src_path.split('.')[1])
+            if file.src_path.split('.')[1] in ['markdown', 'mdown', 'mkdn', 'mkd', 'md']:
                 relative_file_path = file.src_path
                 current_pages.append(relative_file_path)
             if file.src_path.split('/')[-1] == "new-features.md":

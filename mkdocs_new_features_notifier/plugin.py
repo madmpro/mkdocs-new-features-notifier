@@ -78,14 +78,14 @@ class NewFeaturesNotifier(BasePlugin):
                 new_features_file = config["docs_dir"] + "/" + file.src_path
         initial_pages = []
         try:
-            with open(config["docs_dir"] + "/" + "versions.txt") as version_file:
+            with open(config["docs_dir"] + "/" + "versions.json") as version_file:
                 json_data = version_file.readlines()
                 data = json.loads(json_data[-1])
                 print("initial version is " + data["version"])
                 initial_pages = json.loads(json_data[-1])['pages']
 
         except FileNotFoundError:
-            versions_file = open(config["docs_dir"] + "/" + "versions.txt", 'w')
+            versions_file = open(config["docs_dir"] + "/" + "versions.json", 'w')
             file_names = str(current_pages).replace("\'", "\"")
             versions_file.write('{"version":"' + self.get_version_number() + '","pages":' + file_names + '}')
             versions_file.close()
@@ -95,7 +95,7 @@ class NewFeaturesNotifier(BasePlugin):
                 added_pages_paths.append(config["docs_dir"] + "/" + page)
                 self.new_features_introduced = True
         if added_pages_paths:
-            versions_file = open(config["docs_dir"] + "/" + "versions.txt", 'a')
+            versions_file = open(config["docs_dir"] + "/" + "versions.json", 'a')
             str_current_pages = str(current_pages).replace("\'", "\"")
             versions_file.write('\n{"version":"' + self.get_version_number() + '","pages":' + str_current_pages + '}')
             versions_file.close()

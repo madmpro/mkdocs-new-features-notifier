@@ -67,12 +67,18 @@ class NewFeaturesNotifier(BasePlugin):
         self.total_time = 0
         self.new_features_introduced = False
 
+    def get_extension(filename):
+        basename = os.path.basename(filename)  # os independent
+        ext = '.'.join(basename.split('.')[1:])
+        return '.' + ext if ext else None    
+    
     def on_files(self, files, config):
         current_pages = []
         new_features_file = ''
         for file in files:
-            print(file.src_path.split('.')[1])
-            if file.src_path.split('.')[1] in ['markdown', 'mdown', 'mkdn', 'mkd', 'md']:
+            print(file)
+            print(get_extension(file))
+            if file.src_path.split('.')[1] in ['.markdown', '.mdown', '.mkdn', '.mkd', '.md']:
                 relative_file_path = file.src_path
                 current_pages.append(relative_file_path)
             if file.src_path.split('/')[-1] == "new-features.md":

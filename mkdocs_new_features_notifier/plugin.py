@@ -57,11 +57,6 @@ def update_features_listing(new_features_file, added_pages_paths, version):
         message = draft_update_message(added_pages_paths, version)
         features_file.write(message)
 
-def get_extension(filename):
-    basename = os.path.basename(filename)
-    ext = '.'.join(basename.split('.')[1:])
-    return '.' + ext if ext else None
-
 class NewFeaturesNotifier(BasePlugin):
     config_scheme = (
         ('doc_version', config_options.Type(str, default=set_version_number())),
@@ -76,9 +71,7 @@ class NewFeaturesNotifier(BasePlugin):
         current_pages = []
         new_features_file = ''
         for file in files:
-            print(file)
-            print(get_extension(file))
-            if file.src_path.split('.')[1] in ['.markdown', '.mdown', '.mkdn', '.mkd', '.md']:
+            if file.src_path.split('.')[-1] in ['markdown', 'mdown', 'mkdn', 'mkd', 'md']:
                 relative_file_path = file.src_path
                 current_pages.append(relative_file_path)
             if file.src_path.split('/')[-1] == "new-features.md":

@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 
 from mkdocs.config import config_options
 from mkdocs.plugins import BasePlugin

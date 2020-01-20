@@ -56,6 +56,10 @@ def update_features_listing(new_features_file, added_pages_paths, version):
         message = draft_update_message(added_pages_paths, version)
         features_file.write(message)
 
+ def get_extension(filename):
+    basename = os.path.basename(filename)  # os independent
+    ext = '.'.join(basename.split('.')[1:])
+    return '.' + ext if ext else None  
 
 class NewFeaturesNotifier(BasePlugin):
     config_scheme = (
@@ -67,11 +71,6 @@ class NewFeaturesNotifier(BasePlugin):
         self.total_time = 0
         self.new_features_introduced = False
 
-    def get_extension(filename):
-        basename = os.path.basename(filename)  # os independent
-        ext = '.'.join(basename.split('.')[1:])
-        return '.' + ext if ext else None    
-    
     def on_files(self, files, config):
         current_pages = []
         new_features_file = ''

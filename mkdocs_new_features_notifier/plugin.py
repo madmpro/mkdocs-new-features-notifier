@@ -62,7 +62,8 @@ def draft_update_message(added_pages_paths, version):
         title = get_document_title(documentation_content)
         authors = get_document_authors(documentation_content)
         docdate = get_document_date(documentation_content)
-        items_text += "\n- [" + title + "](../../" + path + ")" + "\n Date: " + docdate + " Authors: " + authors
+        if title:
+            items_text += "\n- [" + title + "](../../" + path + ")" + "\n Date: " + docdate + " Authors: " + authors
     return update_title + items_text
 
 def update_features_listing(new_features_file, added_pages_paths, version):

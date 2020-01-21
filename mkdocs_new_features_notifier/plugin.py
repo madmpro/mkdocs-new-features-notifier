@@ -58,7 +58,6 @@ def draft_update_message(added_pages_paths, version):
         items_text += "\n- [" + title + "](../../" + path + ")" + "\n\t> _" + description + "_" + "\n- " + author
     return update_title + items_text
 
-
 def update_features_listing(new_features_file, added_pages_paths, version):
     with open(new_features_file, 'w') as features_file:
         message = draft_update_message(added_pages_paths, version)

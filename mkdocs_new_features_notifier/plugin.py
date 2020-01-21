@@ -38,6 +38,12 @@ def get_document_title(documentation_content):
         title = ""
     return title
 
+def get_document_author(documentation_content):
+    try:
+        title = documentation_content.split('author:')[1].split('\n')[0].strip()
+    except IndexError:
+        title = ""
+    return title
 
 def draft_update_message(added_pages_paths, version):
     update_title = "# New in version " + version + ": \n\n--------"
@@ -48,7 +54,8 @@ def draft_update_message(added_pages_paths, version):
         description = get_document_description(documentation_content)
         path = get_document_path(documentation_content)
         title = get_document_title(documentation_content)
-        items_text += "\n- [" + title + "](../../" + path + ")" + "\n\t> _" + description + "_"
+        author = get_document_author(documentation_content)
+        items_text += "\n- [" + title + "](../../" + path + ")" + "\n\t> _" + description + "_" + "\n- " + author
     return update_title + items_text
 
 

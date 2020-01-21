@@ -60,7 +60,7 @@ def draft_update_message(added_pages_paths, version):
         description = get_document_description(documentation_content)
         path = get_document_path(documentation_content)
         title = get_document_title(documentation_content)
-        authors = get_document_author(documentation_content)
+        authors = get_document_authors(documentation_content)
         docdate = get_document_date(documentation_content)
         items_text += "\n- [" + title + "](../../" + path + ")" + "\n Date: " + docdate + " Authors: " + authors
     return update_title + items_text
